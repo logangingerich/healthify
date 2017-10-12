@@ -1,24 +1,27 @@
-# README
+Healthify Front-End Engineer Coding Challenge
+=============================================
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Hello there! We're excited to have you try out our code challenge. This challenge is based on some
+problems we've faced in real-life at Healthify, so it should give you a good introduction into Healthify's
+domain and problem space. Below, you'll find information on the context of this challenge, the tasks we'd like
+you to complete, and instructions for setting up this repo.
 
-Things you may want to cover:
+While completing this challenge, please be mindful of a few of our practices:
 
-* Ruby version
+* We have a guide for styles and conventions, forked from thoughtbot's, that we adhere to. Please keep these in mind
+when contributing to this repo. https://github.com/healthify/guides
+* Everything we do is tested. We have included some tests in this repo and expect your contributions to be tested
+as well. Also, if you think we're missing any tests, please add them!
+* We have included some guidelines below for how we will evaluate this assignment so that you know what we're
+expecting.
 
-* System dependencies
+## Schema
 
-* Configuration
+Organization
+  name string
+  address string
+  description text
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Service
+  name string
+  organization_id integer

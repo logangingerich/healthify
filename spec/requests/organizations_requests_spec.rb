@@ -30,13 +30,18 @@ RSpec.describe "Organizations API", type: :request do
 
   describe "GET /organizations/:id" do
     context "when the record exists" do
-      it "returns the organization" do
+      it "returns the organization and its services" do
         organization = Organization.create(valid_organization_attrs)
+        services = (1..3).map { organization.services.create(name: "Free Clothes") }
 
         get "/organizations/#{organization.id}"
 
         expect(parsed_response).not_to be_empty
         expect(parsed_response["id"]).to eq(organization.id)
+
+        services_data = parsed_response["_embedded"]["services"]
+        expect(services_data).to be_present
+        expect(services_data.map { |s| s["id"] }).to match_array(services.map(&:id))
       end
 
       it "returns status code 200" do

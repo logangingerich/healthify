@@ -6,7 +6,7 @@ class OrganizationsController < ApplicationController
 
   def show
     @organization = Organization.find(params[:id])
-    render json: @organization, status: :ok
+    render json: OrganizationSerializer.new(@organization), status: :ok
   end
 
 

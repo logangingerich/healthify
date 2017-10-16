@@ -9,6 +9,7 @@ gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'rack-cors'
+gem 'oat'
 
 group :development, :test do
   gem "rspec-rails"

@@ -19,10 +19,10 @@ expecting.
 One of Healthify's main products is a platform that enables our users (primarily social workers)
 to search for and view Organizations  – homeless shelters, food pantries,
 substance abuse clinics – and their Services for their patients. In this coding challenge, we've
-built a minimal aspect of that platform; the app currently provides a API for Organization
+built a minimal aspect of that platform; the app currently provides an API for Organization
 index, show, and create actions and for nested Service create and index actions.
 
-Your challenge is to build a single page app that enables provides the user some basic
+Your challenge is to build a single page app that provides the user some basic
 interfaces for viewing, creating, and destroying these resources as specified in the
 following user stories.
 
@@ -50,19 +50,20 @@ the name and address are entered.
 
 1. As mentioned above, the app must be a single page app; all interactions should be processed client-side.
 2. It is important that it be easy for us to setup and run your submission. Consequently, we limit the use
-of javascript frameworks to Ember or React. Further, for dependencies your submission requires, please
+of javascript frameworks to Ember or React. Further, for dependencies your submission requires, please update
 the README and/or `bin/setup` script to make as easy as possible for us to complete installation.
 
 ## Mockup Details
 For this part of the challenge, we want to see your ability to accurately
-reproduce details from a mockup and infer how other views or features should look based on the
+reproduce details from a mockup and, if applicable, infer how other features should look based on the
 provided mockup. You can use your best judgement for any aspect of the mockup not shown
 (e.g hover states, error messages).
 
 #### Fonts
 The only font used is San Francisco with various weights. Please use this font
-and specify any other native fallback fonts that you think are appropriate.
-
+and specify any other native fallback fonts that you think are appropriate. You do not need
+to use @font-face to use this font. Rather, you may use San Francisco like any other native
+font (Georgia, sans-serif, etc).
 
 ## Dev Setup
 Complete the following to get the existing application API up and running.

@@ -85,7 +85,11 @@ RSpec.describe "Organizations API", type: :request do
 
     context "when the request is invalid" do
       def invalid_organization_attrs
-        valid_organization_attrs.tap { |p| p[:name] = "" }
+        {
+          name: "",
+          address: "151 W 26th St, New York, NY 10001",
+          description: "Blood and Fire",
+        }
       end
 
       it "returns status code 422" do

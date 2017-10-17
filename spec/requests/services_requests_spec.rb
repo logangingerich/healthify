@@ -31,7 +31,7 @@ RSpec.describe "Services API", type: :request do
     context "when the parent organization can be found" do
       it "returns services" do
         organization = Organization.create!(valid_organization_attrs)
-        5.times { |i| organization.services.create!(valid_service_attrs) }
+        5.times { organization.services.create!(valid_service_attrs) }
 
         get "/organizations/#{organization.id}/services"
 
@@ -84,7 +84,11 @@ RSpec.describe "Services API", type: :request do
 
       context "when the request is invalid" do
         def invalid_service_attrs
-          valid_service_attrs.tap { |p| p[:name] = "" }
+          {
+            name: "",
+            address: "151 W 26th St, New York, NY 10001",
+            description: "Blood and Fire",
+          }
         end
 
         it "returns status code 422" do

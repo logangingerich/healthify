@@ -14,6 +14,7 @@ gem 'oat'
 group :development, :test do
   gem "rspec-rails"
   gem "pry-rails"
+  gem 'foreman', '~> 0.82.0'
 end
 
 group :test do

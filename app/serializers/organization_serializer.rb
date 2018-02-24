@@ -6,7 +6,7 @@ class OrganizationSerializer < Oat::Serializer
   schema do
     map_properties :id, :name, :address
     entities :services, item.services do |service, service_serializer|
-      service_serializer.map_properties :id, :name, :address
+      service_serializer.map_properties :id, :name
     end
   end
 end

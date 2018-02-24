@@ -19,6 +19,15 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def destroy
+    organization = Organization.find(params[:id])
+    if organization.destroy
+      head :no_content, status: :ok
+    else
+      render json: { message: organization.errors.full_messages }, status: 422
+    end
+  end
+
   private
 
   def organization_params

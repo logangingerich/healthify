@@ -4,9 +4,9 @@ class OrganizationSerializer < Oat::Serializer
   adapter Oat::Adapters::HAL
 
   schema do
-    map_properties :id, :name
+    map_properties :id, :name, :address
     entities :services, item.services do |service, service_serializer|
-      service_serializer.map_properties :id, :name
+      service_serializer.map_properties :id, :name, :address
     end
   end
 end

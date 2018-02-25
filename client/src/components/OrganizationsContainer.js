@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Organization from './organization'
-import OrganizationForm from './OrganizationForm'
 import axios from 'axios'
 import update from 'immutability-helper'
 
@@ -14,12 +12,12 @@ class OrganizationsContainer extends Component {
       description: "",
       selectedServices: [],
       serviceName: "",
+      selectedOrgID: ""
     }
   }
   //Once mounted, GET request to set organizations, initial selected org info
-  //and another GET request to
+  //and another GET request to retrieve services for displayed organization
   componentDidMount() {
-    let orgLength = ''
     axios.get('/organizations.json')
     .then(response => {
       this.setState({
@@ -29,16 +27,18 @@ class OrganizationsContainer extends Component {
         selectedOrgDescription: response.data[0].description,
         selectedOrgID: response.data[0].id,
       })
-    })
-    .catch(error => console.log(error))
-    axios.get(`/organizations/1`)
-    .then(response => {
-      this.setState({
-        selectedServices: response.data._embedded.services
+      axios.get(`/organizations/${this.state.selectedOrgID}`)
+      .then(response => {
+        this.setState({
+          selectedServices: response.data._embedded.services
+        })
+        console.log(this.state.selectedOrgID)
       })
+      .catch(error => console.log(error))
     })
     .catch(error => console.log(error))
   }
+  //GET request to retrieve info on specific org based on ID
   getOrg = (orgID) => {
     axios.get(`/organizations/${orgID}`)
     .then(response => {
@@ -51,6 +51,7 @@ class OrganizationsContainer extends Component {
       })
     })
   }
+  //DELETE request and organizations update
   deleteOrg = (id) => {
     axios.delete(`/organizations/${id}`)
     .then(response => {
@@ -66,6 +67,7 @@ class OrganizationsContainer extends Component {
     })
     .catch(error => console.log(error))
   }
+  //POST request for new organization and organizations update
   addNewOrg = () => {
     axios.post(
       '/organizations',
@@ -94,6 +96,7 @@ class OrganizationsContainer extends Component {
   handleInput = (e) => {
     this.setState({[e.target.name]: e.target.value})
   }
+  //POST request for creating new service and a service list update
   addNewService = () => {
     axios.post(
       `/organizations/${this.state.selectedOrgID}/services`,
@@ -116,7 +119,7 @@ class OrganizationsContainer extends Component {
         <div className="form">
           <div className="row">
             <div className="col-sm-8">
-              <form onSubmit={this.handleSubmit}>
+              <form>
                 <p className="text-left input-header">Organization Name*</p>
                 <input className='form-control form-input' type="text"
                   name="name" value={this.state.name} onChange={this.handleInput} />
@@ -136,6 +139,7 @@ class OrganizationsContainer extends Component {
             </div>
           </div>
         </div>
+        {this.state.organizations.length !== 0 ?
         <div className="row">
           <div className="col-sm-4 tabs">
             {this.state.organizations.map((organization) => {
@@ -151,7 +155,7 @@ class OrganizationsContainer extends Component {
           </div>
           <div className="col-sm-8">
             <div className="row">
-              <div className="col-sm-7 text-left">
+              <div className="col-sm-7 text-left shown-org">
                 <p className="title-text">{this.state.selectedOrgName}</p>
                 <p>{this.state.selectedOrgAddress}</p>
                 <p>{this.state.selectedOrgDescription}</p>
@@ -174,7 +178,9 @@ class OrganizationsContainer extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> :
+        <h5>No Organizations! Try Adding Some Above</h5>
+      }
       </div>
     );
   }

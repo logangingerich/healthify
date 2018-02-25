@@ -28,7 +28,6 @@
 }
 
 .title-text {
-  font-weight: 250;
   font-size: 150%;
   margin-bottom: 0;
   color: #4592dc;
@@ -45,6 +44,10 @@
   color: black;
   font-weight: 250;
   font-size: 75%;
+}
+
+.shown-org {
+  font-weight: 250;
 }
 
 .service {

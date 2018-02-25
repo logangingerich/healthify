@@ -32,7 +32,7 @@ following user stories.
 1. As a user on the organizations index page, I may add an organization
 by entering a name, address, and description.
 
-2. As a user, I may not create an organization unless 
+2. As a user, I may not create an organization unless
 the name and address are entered.
 
 ### Read / Relations

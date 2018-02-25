@@ -106,4 +106,31 @@ RSpec.describe "Organizations API", type: :request do
       end
     end
   end
+
+  describe 'DELETE /organizations/:id' do
+    context "when the record exists" do
+      it 'deletes organization' do
+        organization = Organization.create(valid_organization_attrs)
+        orgID = organization.id
+
+        delete "/organizations/#{organization.id}"
+        expect(Organization.where(id: orgID)).to be_empty
+      end
+
+      it "returns status code 204" do
+        organization = Organization.create(valid_organization_attrs)
+
+        delete "/organizations/#{organization.id}"
+        expect(response).to have_http_status(204)
+      end
+    end
+
+    context "when the record doesn't exist" do
+      it "returns status code 404" do
+        delete "/organizations/0"
+
+        expect(response).to have_http_status(404)
+      end
+    end
+  end
 end

@@ -13,9 +13,13 @@ class OrganizationsContainer extends Component {
       address: "",
       description: "",
       selectedServices: [],
+      serviceName: "",
     }
   }
+  //Once mounted, GET request to set organizations, initial selected org info
+  //and another GET request to
   componentDidMount() {
+    let orgLength = ''
     axios.get('/organizations.json')
     .then(response => {
       this.setState({
@@ -23,16 +27,17 @@ class OrganizationsContainer extends Component {
         selectedOrgName: response.data[0].name,
         selectedOrgAddress: response.data[0].address,
         selectedOrgDescription: response.data[0].description,
-        selectedOrgID: response.data[0].id
+        selectedOrgID: response.data[0].id,
       })
     })
     .catch(error => console.log(error))
-    axios.get('/organizations/1')
+    axios.get(`/organizations/1`)
     .then(response => {
       this.setState({
         selectedServices: response.data._embedded.services
       })
     })
+    .catch(error => console.log(error))
   }
   getOrg = (orgID) => {
     axios.get(`/organizations/${orgID}`)
@@ -44,7 +49,6 @@ class OrganizationsContainer extends Component {
         selectedOrgID: response.data.id,
         selectedServices: response.data._embedded.services
       })
-      console.log(response.data._embedded.services)
     })
   }
   deleteOrg = (id) => {
@@ -90,43 +94,42 @@ class OrganizationsContainer extends Component {
   handleInput = (e) => {
     this.setState({[e.target.name]: e.target.value})
   }
-  handleSubmit = () => {
-    const organization = {
-      title: this.state.name,
-      body: this.state.address,
-      description: this.state.description
-    }
-    axios.put(
-      `organizations/${this.props.organization.id}`,
-      {
-        organization: organization
-      })
+  addNewService = () => {
+    axios.post(
+      `/organizations/${this.state.selectedOrgID}/services`,
+      {service: {name: this.state.serviceName}}
+    )
     .then(response => {
-      console.log(response)
+      const services = update(this.state.selectedServices, {
+        $splice: [[0, 0, response.data]]
+      })
+      this.setState({
+        selectedServices: services,
+        serviceName: ""
+      })
     })
     .catch(error => console.log(error))
   }
   render() {
-    let {selectedOrg} = this.state
     return (
-      <div className="container-fluid">
+      <div>
         <div className="form">
           <div className="row">
             <div className="col-sm-8">
               <form onSubmit={this.handleSubmit}>
-                <input className='form-control' type="text"
-                  name="name" value={this.state.name} onChange={this.handleInput}
-                  placeholder='Enter Organization Name' />
-                <textarea className='form-control' name="address"
-                  value={this.state.address} onChange={this.handleInput}
-                  placeholder='Address'></textarea>
+                <p className="text-left input-header">Organization Name*</p>
+                <input className='form-control form-input' type="text"
+                  name="name" value={this.state.name} onChange={this.handleInput} />
+                <p className="text-left input-header">Organization Address*</p>
+                <textarea className='form-control form-input' name="address"
+                  value={this.state.address} onChange={this.handleInput}></textarea>
               </form>
             </div>
             <div className="col-sm-4">
               <form>
-                <textarea className='form-control' name="description"
-                  value={this.state.description} onChange={this.handleInput}
-                  placeholder='Description'></textarea>
+                <p className="text-left input-header">Organization Description</p>
+                <textarea className='form-control form-input' name="description"
+                  value={this.state.description} onChange={this.handleInput}></textarea>
                 <br></br>
                 <button className="btn btn-outline-light" onClick={this.addNewOrg}>Add Organization</button>
               </form>
@@ -161,6 +164,10 @@ class OrganizationsContainer extends Component {
                     </div>
                   )
                 })}
+                <input className='form-control service-input' type="text" name="serviceName"
+                placeholder="Enter New Service Name" value={this.state.serviceName}
+                onChange={this.handleInput} />
+                <button onClick={this.addNewService} className="btn btn-outline-primary">Add New Service</button>
               </div>
               <div className="col-sm-1">
                 <button className="btn btn-outline-danger" onClick={() => this.deleteOrg(this.state.selectedOrgID)}>Delete Organization</button>

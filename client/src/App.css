@@ -6,11 +6,24 @@
   padding: 20px 20px 20px 20px;
   margin-bottom: 10px;
   background-color: #4592dc;
+  margin-left: 0px;
+  width: 100%;
 }
+
+ .input-header {
+   color: white;
+   margin-bottom: 0;
+   font-weight: 200;
+   font-size: 80%;
+ }
+
+ .form-input {
+   margin-bottom: 7px;
+ }
 
 .tabs button {
   width:100%;
-  margin-bottom: 10px;
+  margin: 10px;
   white-space: normal;
 }
 
@@ -37,6 +50,10 @@
 .service {
   float: left;
   margin-right: 5px;
+}
+
+.service-input {
+  margin-bottom: 5px;
 }
 
 /*BUTTON CUSTOMIZATION*/

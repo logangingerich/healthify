@@ -13,3 +13,52 @@
   margin-bottom: 10px;
   white-space: normal;
 }
+
+.title-text {
+  font-weight: 250;
+  font-size: 150%;
+  margin-bottom: 0;
+  color: #4592dc;
+}
+
+.btn-title {
+  font-weight: 250;
+  font-size: 110%;
+  margin-bottom: 0;
+}
+
+.btn-address {
+  margin-bottom: 0;
+  color: black;
+  font-weight: 250;
+  font-size: 75%;
+}
+
+.service {
+  float: left;
+  margin-right: 5px;
+}
+
+/*BUTTON CUSTOMIZATION*/
+.btn-list {
+  background: white;
+  background-image: -webkit-linear-gradient(top, white, #4592dc;);
+  background-image: -moz-linear-gradient(top, white, #4592dc;);
+  background-image: -ms-linear-gradient(top, white, #4592dc;);
+  background-image: -o-linear-gradient(top, white, #4592dc;);
+  background-image: linear-gradient(to bottom, white, #4592dc;);
+  -webkit-border-radius: 9;
+  -moz-border-radius: 9;
+  border-radius: 9px;
+  color: #4592dc;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  border: solid #4592dc 3px;
+  text-decoration: none;
+}
+
+.btn-list:hover {
+  background: #4592dc;
+  color: white;
+  text-decoration: none;
+}

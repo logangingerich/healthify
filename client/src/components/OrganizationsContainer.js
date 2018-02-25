@@ -11,7 +11,8 @@ class OrganizationsContainer extends Component {
       organizations: [],
       name: "",
       address: "",
-      description: ""
+      description: "",
+      selectedServices: [],
     }
   }
   componentDidMount() {
@@ -26,6 +27,12 @@ class OrganizationsContainer extends Component {
       })
     })
     .catch(error => console.log(error))
+    axios.get('/organizations/1')
+    .then(response => {
+      this.setState({
+        selectedServices: response.data._embedded.services
+      })
+    })
   }
   getOrg = (orgID) => {
     axios.get(`/organizations/${orgID}`)
@@ -34,8 +41,10 @@ class OrganizationsContainer extends Component {
         selectedOrgName: response.data.name,
         selectedOrgAddress: response.data.address,
         selectedOrgDescription: response.data.description,
-        selectedOrgID: response.data.id
+        selectedOrgID: response.data.id,
+        selectedServices: response.data._embedded.services
       })
+      console.log(response.data._embedded.services)
     })
   }
   deleteOrg = (id) => {
@@ -119,7 +128,7 @@ class OrganizationsContainer extends Component {
                   value={this.state.description} onChange={this.handleInput}
                   placeholder='Description'></textarea>
                 <br></br>
-                <button className="btn btn-success" onClick={this.addNewOrg}>Add Organization</button>
+                <button className="btn btn-outline-light" onClick={this.addNewOrg}>Add Organization</button>
               </form>
             </div>
           </div>
@@ -129,9 +138,9 @@ class OrganizationsContainer extends Component {
             {this.state.organizations.map((organization) => {
               return (
                 <div>
-                  <button className="btn btn-success" onClick={() => this.getOrg(organization.id)} key={organization.id}>
-                    <h5>{organization.name}</h5>
-                    <p>{organization.address}</p>
+                  <button className="btn-list" onClick={() => this.getOrg(organization.id)} key={organization.id}>
+                    <h5 className="btn-title">{organization.name}</h5>
+                    <p className="btn-address">{organization.address}</p>
                   </button>
                 </div>
               )
@@ -139,13 +148,22 @@ class OrganizationsContainer extends Component {
           </div>
           <div className="col-sm-8">
             <div className="row">
-              <div className="col-sm-7">
-                <h5>{this.state.selectedOrgName}</h5>
+              <div className="col-sm-7 text-left">
+                <p className="title-text">{this.state.selectedOrgName}</p>
                 <p>{this.state.selectedOrgAddress}</p>
                 <p>{this.state.selectedOrgDescription}</p>
+                <br></br>
+                <p>Services Provided</p>
+                {this.state.selectedServices.map((service) => {
+                  return (
+                    <div>
+                      <p className="badge badge-primary service">{service.name}</p>
+                    </div>
+                  )
+                })}
               </div>
               <div className="col-sm-1">
-                <button className="btn btn-danger" onClick={() => this.deleteOrg(this.state.selectedOrgID)}>Delete Organization</button>
+                <button className="btn btn-outline-danger" onClick={() => this.deleteOrg(this.state.selectedOrgID)}>Delete Organization</button>
               </div>
             </div>
           </div>

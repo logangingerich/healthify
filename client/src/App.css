@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #fafafa;
 }
 
 .form {
@@ -48,6 +49,7 @@
 
 .shown-org {
   font-weight: 250;
+  background-color: white;
 }
 
 .service {

@@ -18,7 +18,7 @@ class OrganizationsContainer extends Component {
   //Once mounted, GET request to set organizations, initial selected org info
   //and another GET request to retrieve services for displayed organization
   componentDidMount() {
-    axios.get('/organizations.json')
+    axios.get('/organizations')
     .then(response => {
       this.setState({
         organizations: response.data,
@@ -32,7 +32,6 @@ class OrganizationsContainer extends Component {
         this.setState({
           selectedServices: response.data._embedded.services
         })
-        console.log(this.state.selectedOrgID)
       })
       .catch(error => console.log(error))
     })
@@ -134,7 +133,7 @@ class OrganizationsContainer extends Component {
                 <textarea className='form-control form-input' name="description"
                   value={this.state.description} onChange={this.handleInput}></textarea>
                 <br></br>
-                <button className="btn btn-outline-light" onClick={this.addNewOrg}>Add Organization</button>
+                <button className="btn btn-outline-light test" onClick={this.addNewOrg}>Add Organization</button>
               </form>
             </div>
           </div>
@@ -144,8 +143,8 @@ class OrganizationsContainer extends Component {
           <div className="col-sm-4 tabs">
             {this.state.organizations.map((organization) => {
               return (
-                <div>
-                  <button className="btn-list" onClick={() => this.getOrg(organization.id)} key={organization.id}>
+                <div key={organization.id}>
+                  <button className="btn-list" onClick={() => this.getOrg(organization.id)}>
                     <h5 className="btn-title">{organization.name}</h5>
                     <p className="btn-address">{organization.address}</p>
                   </button>
@@ -154,8 +153,8 @@ class OrganizationsContainer extends Component {
             })}
           </div>
           <div className="col-sm-8">
-            <div className="row">
-              <div className="col-sm-7 text-left shown-org">
+            <div className="row shown-org">
+              <div className="col-sm-7 text-left">
                 <p className="title-text">{this.state.selectedOrgName}</p>
                 <p>{this.state.selectedOrgAddress}</p>
                 <p>{this.state.selectedOrgDescription}</p>
@@ -163,7 +162,7 @@ class OrganizationsContainer extends Component {
                 <p>Services Provided</p>
                 {this.state.selectedServices.map((service) => {
                   return (
-                    <div>
+                    <div key={service.id}>
                       <p className="badge badge-primary service">{service.name}</p>
                     </div>
                   )

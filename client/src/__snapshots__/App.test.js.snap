@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="App"
+>
+  <div>
+    <div
+      className="form"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-8"
+        >
+          <form>
+            <p
+              className="text-left input-header"
+            >
+              Organization Name*
+            </p>
+            <input
+              className="form-control form-input"
+              name="name"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+            <p
+              className="text-left input-header"
+            >
+              Organization Address*
+            </p>
+            <textarea
+              className="form-control form-input"
+              name="address"
+              onChange={[Function]}
+              value=""
+            />
+          </form>
+        </div>
+        <div
+          className="col-sm-4"
+        >
+          <form>
+            <p
+              className="text-left input-header"
+            >
+              Organization Description
+            </p>
+            <textarea
+              className="form-control form-input"
+              name="description"
+              onChange={[Function]}
+              value=""
+            />
+            <br />
+            <button
+              className="btn btn-outline-light test"
+              onClick={[Function]}
+            >
+              Add Organization
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <h5>
+      No Organizations! Try Adding Some Above
+    </h5>
+  </div>
+</div>
+`;

@@ -15,7 +15,7 @@ class OrganizationsContainer extends Component {
       selectedOrgID: ""
     }
   }
-  //Once mounted, GET request to set organizations, initial selected org info
+  //Once mounted, GET request to set organizations, initial selected organization info
   //and another GET request to retrieve services for displayed organization
   componentDidMount() {
     axios.get('/organizations')
@@ -37,7 +37,7 @@ class OrganizationsContainer extends Component {
     })
     .catch(error => console.log(error))
   }
-  //GET request to retrieve info on specific org based on ID
+  //GET request to retrieve info on specific organization based on ID
   getOrg = (orgID) => {
     axios.get(`/organizations/${orgID}`)
     .then(response => {
@@ -115,6 +115,7 @@ class OrganizationsContainer extends Component {
   render() {
     return (
       <div>
+      {/*FORM FOR ORGANZATION CREATION*/}
         <div className="form">
           <div className="row">
             <div className="col-sm-8">
@@ -138,6 +139,7 @@ class OrganizationsContainer extends Component {
             </div>
           </div>
         </div>
+        {/*LEFT SIDEBAR DISPLAYING ALL ORGANIZATIONS*/}
         {this.state.organizations.length !== 0 ?
         <div className="row">
           <div className="col-sm-4 tabs">
@@ -152,6 +154,7 @@ class OrganizationsContainer extends Component {
               )
             })}
           </div>
+          {/*BOTTOM RIGHT SHOW VIEW OF SELECTED ORGANIZATION*/}
           <div className="col-sm-8">
             <div className="row shown-org">
               <div className="col-sm-7 text-left">
@@ -167,6 +170,7 @@ class OrganizationsContainer extends Component {
                     </div>
                   )
                 })}
+                {/*INPUT FORM FOR NEW SERVICE FOR CORRESPONSING ORGANIZATION*/}
                 <input className='form-control service-input' type="text" name="serviceName"
                 placeholder="Enter New Service Name" value={this.state.serviceName}
                 onChange={this.handleInput} />

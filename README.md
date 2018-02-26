@@ -10,7 +10,7 @@ Complete the following to get the Rails API and React client up and running.
 2. Install dependencies and setup DB by running the setup script: `bin/setup`.
 3. Run `cd client && npm install && cd ..` to install dependencies for the
 React client.
-3. Start the local server: `bin/rake start`.
+3. Start the local server: `bin/rake start`
 4. Visit 'localhost:3000' in your web browser of choice.
 
 ## Tests
